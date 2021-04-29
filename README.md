@@ -1,4 +1,4 @@
-# Navigation Drawer and Slidable Menu
+# Navigation Drawer
 #### the project also implements
 * the use of Fragments
 
