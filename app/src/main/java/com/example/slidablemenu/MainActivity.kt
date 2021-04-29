@@ -6,7 +6,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,27 +23,45 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        displayFragment(-1)
+
         navView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.homes -> {
-                    Toast.makeText(applicationContext, "you clicked "+ it.title, Toast.LENGTH_SHORT).show()
-                }
-
-                R.id.setting -> {
-                    Toast.makeText(applicationContext, "you clicked "+ it.title, Toast.LENGTH_SHORT).show()
-                }
-
-                R.id.contact -> {
-                    Toast.makeText(applicationContext, "you clicked "+ it.title, Toast.LENGTH_SHORT).show()
-                }
-
-                R.id.help -> {
-                    Toast.makeText(applicationContext, "you clicked "+ it.title, Toast.LENGTH_SHORT).show()
-                }
-            }
-            true
+           displayFragment(it.itemId)
         }
     }
+    private fun displayFragment(id: Int): Boolean{
+
+        val fragment =  when(id){
+
+                        R.id.homes -> {
+                            HomeFragment()
+                        }
+
+                        R.id.contact -> {
+                            ContactFragment()
+                        }
+
+                        R.id.help -> {
+                            HelpFragment()
+                        }
+
+                        R.id.setting -> {
+                            SettingFragment()
+                        }
+                        else -> {
+                            HomeFragment()
+                        }
+        }
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.myFrameLayout, fragment)
+            commit()
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
