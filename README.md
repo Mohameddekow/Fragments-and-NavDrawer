@@ -3,7 +3,7 @@
 # Newly added
 * The use of `viewBinding` in `Fragments` and `Activities`
 # Updated part
-* replace the `depreciated` `Kotlin-Synthetics` with `viewBinding`
+* replaced the `depreciated` `Kotlin-Synthetics` with `viewBinding`
 ### the project also implements
 * the use of Fragments
 *************
